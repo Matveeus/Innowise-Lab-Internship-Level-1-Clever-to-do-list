@@ -9,7 +9,7 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['src/**/*.js', 'src/**/*.jsx'], // путь к файлам, которые нужно проверять
+      files: ['src/**/*.js', 'src/**/*.jsx'],
       rules: {
         "react/jsx-filename-extension": [
           1,

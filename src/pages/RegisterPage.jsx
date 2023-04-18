@@ -1,17 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Container } from '@mui/material';
 import Register from '../components/Register';
 
 function RegisterPage() {
   return (
-    <div>
-      <h1>Register</h1>
+    <Container maxWidth="xs">
       <Register />
-      <p>
-        Already have account ?
-        <Link to="/login">login</Link>
-      </p>
-    </div>
+      <div style={{ display: 'flex', justifyContent: 'center', fontFamily: 'Roboto' }}>
+        <Link to="/login" variant="body2">
+          Already have an account? Sign In!
+        </Link>
+      </div>
+    </Container>
   );
 }
 

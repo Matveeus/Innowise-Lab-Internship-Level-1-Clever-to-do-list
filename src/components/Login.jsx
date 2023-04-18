@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { Alert, Snackbar } from '@mui/material';
 import { setUser } from '../store/slices/userSlice';
 import Form from './Form';
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   const handleLogin = (email, password) => {
     const auth = getAuth();
@@ -20,14 +22,25 @@ function Login() {
         }));
         navigate('/');
       })
-      .catch();
+    // eslint-disable-next-line no-shadow
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (
-    <Form
-      title="login"
-      handleClick={handleLogin}
-    />
+    <>
+      <Form
+        title="Sign in"
+        handleClick={handleLogin}
+        buttonTitle="login"
+      />
+      <Snackbar open={error !== null} autoHideDuration={6000} onClose={() => setError(null)}>
+        <Alert severity="error" sx={{ width: '100%' }}>
+          {error}
+        </Alert>
+      </Snackbar>
+    </>
   );
 }
 
