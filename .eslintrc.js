@@ -8,6 +8,15 @@ module.exports = {
     'airbnb',
   ],
   overrides: [
+    {
+      files: ['src/**/*.js', 'src/**/*.jsx'], // путь к файлам, которые нужно проверять
+      rules: {
+        "react/jsx-filename-extension": [
+          1,
+          { "extensions": [".js", ".jsx"] }
+        ]
+      }
+    }
   ],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -16,10 +25,4 @@ module.exports = {
   plugins: [
     'react',
   ],
-  "rules": {
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".js", ".jsx"] }
-    ]
-  }
 };
