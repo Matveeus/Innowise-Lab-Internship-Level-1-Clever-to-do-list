@@ -1,17 +1,17 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import userAuth from '../hooks/user-auth';
-import { removeUser } from '../store/slices/userSlice';
+import Calendar from '../components/Calendar';
+import FooterButtons from '../components/FooterButtons';
 
 function TasksPage() {
-  const dispatch = useDispatch();
   const { isAuth } = userAuth();
 
   return isAuth ? (
     <>
+      <Calendar />
       <h1>Tasks</h1>
-      <button type="submit" onClick={() => dispatch(removeUser())}>Log out</button>
+      <FooterButtons />
     </>
   ) : (
     <Navigate to="/login" />
