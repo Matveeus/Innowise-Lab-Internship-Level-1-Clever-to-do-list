@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import '../App.css';
 
 function Calendar() {
@@ -34,7 +34,8 @@ function Calendar() {
     <Box
       sx={{
         display: 'flex',
-        overflowX: 'scroll',
+        justifyContent: 'space-between',
+        overflowX: 'auto',
         scrollSnapType: 'x mandatory',
         paddingBottom: '12px',
       }}
@@ -67,6 +68,7 @@ function Calendar() {
               weekday: 'short',
             })}
           </Typography>
+          <Divider />
         </Box>
       ))}
     </Box>

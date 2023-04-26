@@ -6,7 +6,6 @@ import FooterButtons from '../components/FooterButtons';
 
 function TasksPage() {
   const { isAuth } = userAuth();
-
   return isAuth ? (
     <>
       <Calendar />
