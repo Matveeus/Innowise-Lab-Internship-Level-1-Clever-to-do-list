@@ -1,32 +1,31 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { Alert, Snackbar } from '@mui/material';
-import { setUser } from '../store/slices/userSlice';
 import Form from './Form';
 
 function Register() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-  const handleRegister = (email, password) => {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        dispatch(setUser({
-          email: user.email,
-          id: user.uid,
-          token: user.accessToken,
-        }));
-        navigate('/');
-      })
-    // eslint-disable-next-line no-shadow
-      .catch((error) => {
-        setError(error.message);
-      });
+  const handleRegister = async (email, password) => {
+    try {
+      const auth = getAuth();
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
+    }
   };
+
+  useEffect(() => {
+    const unsubscribe = getAuth().onAuthStateChanged((user) => {
+      if (user) {
+        navigate('/');
+      }
+    });
+    return unsubscribe;
+  }, [navigate]);
 
   return (
     <>

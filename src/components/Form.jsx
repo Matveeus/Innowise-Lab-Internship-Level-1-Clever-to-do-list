@@ -4,7 +4,6 @@ import {
 } from '@mui/material';
 import LockPersonRoundedIcon from '@mui/icons-material/LockPersonRounded';
 
-// eslint-disable-next-line react/prop-types
 function Form({ title, handleClick, buttonTitle }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -64,37 +63,3 @@ function Form({ title, handleClick, buttonTitle }) {
 }
 
 export default Form;
-
-// eslint-disable-next-line react/prop-types
-// function Form({ title, handleClick }) {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//
-//     return (
-//         <Container component="main" maxWidth="xs">
-//             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-//                 <LockPersonRoundedIcon />
-//             </Avatar>
-//             <Typography component="h1" variant="h5">
-//                 {title}
-//             </Typography>
-//             <TextField
-//                 type="email"
-//                 value={email}
-//                 onChange={(e) => setEmail(e.target.value)}
-//                 placeholder="email here"
-//             />
-//             <TextField
-//                 type="password"
-//                 value={password}
-//                 onChange={(e) => setPassword(e.target.value)}
-//                 placeholder="password here"
-//             />
-//             <Button type="submit" onClick={() => handleClick(email, password)}>
-//                 {title}
-//             </Button>
-//         </Container>
-//     );
-// }
-//
-// export default Form;

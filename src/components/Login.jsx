@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Alert, Snackbar } from '@mui/material';
-import { setUser } from '../store/slices/userSlice';
 import Form from './Form';
+import { auth } from '../services/firebase';
 
 function Login() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-  const handleLogin = (email, password) => {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        dispatch(setUser({
-          email: user.email,
-          id: user.uid,
-          token: user.accessToken,
-        }));
-        navigate('/');
-      })
-    // eslint-disable-next-line no-shadow
-      .catch((error) => {
-        setError(error.message);
-      });
+
+  const handleLogin = async (email, password) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
+    }
   };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate('/');
+      }
+    });
+    return unsubscribe;
+  }, [navigate]);
 
   return (
     <>

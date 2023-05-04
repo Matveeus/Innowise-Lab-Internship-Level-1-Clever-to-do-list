@@ -6,16 +6,21 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import TasksPage from './pages/TasksPage';
+import { TodoContextProvider } from './context';
 
 function App() {
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Routes>
-        <Route path="/" element={<TasksPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Routes>
-    </LocalizationProvider>
+    <TodoContextProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+        <Routes>
+          <Route path="/" element={<TasksPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Routes>
+
+      </LocalizationProvider>
+    </TodoContextProvider>
   );
 }
 

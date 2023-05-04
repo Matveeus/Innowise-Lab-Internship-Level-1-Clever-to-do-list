@@ -1,19 +1,25 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import userAuth from '../hooks/user-auth';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../services/firebase';
 import Calendar from '../components/Calendar';
 import FooterButtons from '../components/FooterButtons';
+import Tasks from '../components/Tasks';
 
 function TasksPage() {
-  const { isAuth } = userAuth();
-  return isAuth ? (
+  const navigate = useNavigate();
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        navigate('/login');
+      }
+    });
+  });
+  return (
     <>
       <Calendar />
-      <h1>Tasks</h1>
+      <Tasks />
       <FooterButtons />
     </>
-  ) : (
-    <Navigate to="/login" />
   );
 }
 
