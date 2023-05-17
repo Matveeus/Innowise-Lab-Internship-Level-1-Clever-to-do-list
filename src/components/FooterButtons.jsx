@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import {
-  Alert, Box, IconButton, Snackbar,
-} from '@mui/material';
-import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { Box, IconButton } from '@mui/material';
 import { auth } from '../services/firebase';
 import AddTaskModal from './AddTaskModal';
+import ErrorBar from './ErrorBar';
 
 export default function FooterButtons() {
   const navigate = useNavigate();
@@ -39,11 +38,7 @@ export default function FooterButtons() {
       >
         <ExitToAppIcon />
       </IconButton>
-      <Snackbar open={error !== null} autoHideDuration={6000} onClose={() => setError(null)}>
-        <Alert severity="error" sx={{ width: '100%' }}>
-          {error}
-        </Alert>
-      </Snackbar>
+      <ErrorBar error={error} setError={setError} />
     </Box>
   );
 }

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Alert, Snackbar } from '@mui/material';
 import Form from './Form';
 import { auth } from '../services/firebase';
+import ErrorBar from './ErrorBar';
 
 function Login() {
   const navigate = useNavigate();
@@ -34,11 +34,7 @@ function Login() {
         handleClick={handleLogin}
         buttonTitle="login"
       />
-      <Snackbar open={error !== null} autoHideDuration={6000} onClose={() => setError(null)}>
-        <Alert severity="error" sx={{ width: '100%' }}>
-          {error}
-        </Alert>
-      </Snackbar>
+      <ErrorBar error={error} setError={setError} />
     </>
   );
 }

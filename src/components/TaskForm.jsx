@@ -11,13 +11,14 @@ import { Container, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import { TodoContext } from '../context';
+import ErrorBar from './ErrorBar';
 
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function TaskForm({
   handleSubmit, handleClickClose, heading, maxDate, open,
   taskTitle, setTaskTitle,
-  taskDescription, setTaskDescription, buttonText,
+  taskDescription, setTaskDescription, buttonText, error, setError,
 }) {
   const {
     selectedDay, setSelectedDay, today,
@@ -96,6 +97,7 @@ export default function TaskForm({
           >
             {buttonText}
           </Button>
+          <ErrorBar error={error} setError={setError} />
         </Container>
       </Dialog>
     </div>

@@ -15,6 +15,7 @@ export default function EditTaskModal({
   const [open, setOpen] = useState(false);
   const [taskTitle, setTaskTitle] = useState(name);
   const [taskDescription, setTaskDescription] = useState(description);
+  const [error, setError] = useState(null);
 
   const handleModal = () => {
     setTaskTitle(name);
@@ -29,8 +30,9 @@ export default function EditTaskModal({
         description: taskDescription,
         date: selectedDay,
       });
-      console.log(selectedDay);
       setOpen(false);
+    } else {
+      setError('Please, enter task title');
     }
   };
 
@@ -39,7 +41,7 @@ export default function EditTaskModal({
       <IconButton aria-label="edit task" onClick={handleModal}>
         <Edit />
       </IconButton>
-      <TaskForm handleSubmit={handleSubmit} handleClickClose={handleModal} heading="What are you going to change ? 🧐" today={today} maxDate={maxDate} open={open} taskTitle={taskTitle} setTaskTitle={setTaskTitle} taskDescription={taskDescription} setTaskDescription={setTaskDescription} buttonText="UPDATE" />
+      <TaskForm handleSubmit={handleSubmit} handleClickClose={handleModal} heading="What are you going to change ? 🧐" today={today} maxDate={maxDate} open={open} taskTitle={taskTitle} setTaskTitle={setTaskTitle} taskDescription={taskDescription} setTaskDescription={setTaskDescription} buttonText="UPDATE" error={error} setError={setError} />
     </div>
   );
 }

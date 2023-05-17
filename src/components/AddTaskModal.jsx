@@ -11,6 +11,7 @@ export default function AddTaskModal() {
   const [open, setOpen] = useState(false);
   const [taskTitle, setTaskTitle] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
+  const [error, setError] = useState(null);
   const {
     today, maxDate,
   } = useContext(TodoContext);
@@ -34,9 +35,10 @@ export default function AddTaskModal() {
   const handleSaveTask = (selectedDay) => {
     const taskId = uid();
     if (taskTitle) {
-      console.log(selectedDay);
       createNewTask(taskId, selectedDay);
       setOpen(false);
+    } else {
+      setError('Please, enter task title');
     }
   };
 
@@ -52,7 +54,7 @@ export default function AddTaskModal() {
       >
         Add new task
       </Button>
-      <TaskForm handleSubmit={handleSaveTask} handleClickClose={handleModal} heading="What are you planning to do ? 🤔" today={today} maxDate={maxDate} open={open} taskTitle={taskTitle} setTaskTitle={setTaskTitle} taskDescription={taskDescription} setTaskDescription={setTaskDescription} buttonText="SAVE" />
+      <TaskForm handleSubmit={handleSaveTask} handleClickClose={handleModal} heading="What are you planning to do ? 🤔" today={today} maxDate={maxDate} open={open} taskTitle={taskTitle} setTaskTitle={setTaskTitle} taskDescription={taskDescription} setTaskDescription={setTaskDescription} buttonText="SAVE" error={error} setError={setError} />
     </div>
   );
 }
