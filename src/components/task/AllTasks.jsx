@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { Box } from '@mui/material';
 import Task from './Task';
 import TasksHeading from './TasksHeading';
-import { TodoContext } from '../context';
+import { TodoContext } from '../../context/calendarData';
 
-function Tasks() {
+function AllTasks() {
   const { tasks, selectedDay } = useContext(TodoContext);
   const filteredTasks = tasks.filter((task) => task.date === selectedDay);
   return (
@@ -23,4 +23,4 @@ function Tasks() {
   );
 }
 
-export default Tasks;
+export default AllTasks;

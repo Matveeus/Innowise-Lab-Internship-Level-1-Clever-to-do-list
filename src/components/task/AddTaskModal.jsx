@@ -1,20 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import { set, ref } from 'firebase/database';
 import { uid } from 'uid';
-import { db, auth } from '../services/firebase';
+import { db, auth } from '../../services/firebase';
 import TaskForm from './TaskForm';
-import { TodoContext } from '../context';
 
 export default function AddTaskModal() {
   const [open, setOpen] = useState(false);
   const [taskTitle, setTaskTitle] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
   const [error, setError] = useState(null);
-  const {
-    today, maxDate,
-  } = useContext(TodoContext);
 
   const handleModal = () => {
     setTaskTitle('');
@@ -42,6 +38,20 @@ export default function AddTaskModal() {
     }
   };
 
+  const taskProps = {
+    handleSubmit: handleSaveTask,
+    handleClickClose: handleModal,
+    heading: 'What are you planning to do ? 🤔',
+    open,
+    taskTitle,
+    setTaskTitle,
+    taskDescription,
+    setTaskDescription,
+    buttonText: 'SAVE',
+    error,
+    setError,
+  };
+
   return (
     <div>
       <Button
@@ -54,7 +64,7 @@ export default function AddTaskModal() {
       >
         Add new task
       </Button>
-      <TaskForm handleSubmit={handleSaveTask} handleClickClose={handleModal} heading="What are you planning to do ? 🤔" today={today} maxDate={maxDate} open={open} taskTitle={taskTitle} setTaskTitle={setTaskTitle} taskDescription={taskDescription} setTaskDescription={setTaskDescription} buttonText="SAVE" error={error} setError={setError} />
+      <TaskForm {...taskProps} />
     </div>
   );
 }

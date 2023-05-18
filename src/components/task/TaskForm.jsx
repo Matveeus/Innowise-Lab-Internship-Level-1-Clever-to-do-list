@@ -1,29 +1,23 @@
 import React, { useContext, useState } from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import {
+  Container, TextField, Button, Dialog, AppBar, Toolbar, IconButton, Typography, Slide,
+} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
-import { Container, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
-import { TodoContext } from '../context';
-import ErrorBar from './ErrorBar';
+import { TodoContext } from '../../context/calendarData';
+import ErrorBar from '../ErrorBar';
 
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-
 export default function TaskForm({
-  handleSubmit, handleClickClose, heading, maxDate, open,
-  taskTitle, setTaskTitle,
+  handleSubmit, handleClickClose, heading, open, taskTitle, setTaskTitle,
   taskDescription, setTaskDescription, buttonText, error, setError,
 }) {
   const {
-    selectedDay, setSelectedDay, today,
+    selectedDay, setSelectedDay, today, maxDate,
   } = useContext(TodoContext);
   const [tempSelectedDay, setTempSelectedDay] = useState(selectedDay);
+
   return (
     <div>
       <Dialog
@@ -78,7 +72,7 @@ export default function TaskForm({
               const formattedDate = dayjs(tempSelected).format('YYYY-MM-DD');
               setTempSelectedDay(formattedDate);
             }}
-            label="Сhoose date, but think twice !"
+            label="Choose date, but think twice !"
             format="YYYY-MM-DD"
             value={dayjs(selectedDay)}
             minDate={dayjs(today)}

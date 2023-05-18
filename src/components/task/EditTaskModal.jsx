@@ -1,17 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Edit } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { ref, update } from 'firebase/database';
+import { auth, db } from '../../services/firebase';
 import TaskForm from './TaskForm';
-import { auth, db } from '../services/firebase';
-import { TodoContext } from '../context';
 
 export default function EditTaskModal({
   name, description, taskId,
 }) {
-  const {
-    today, maxDate,
-  } = useContext(TodoContext);
   const [open, setOpen] = useState(false);
   const [taskTitle, setTaskTitle] = useState(name);
   const [taskDescription, setTaskDescription] = useState(description);
@@ -23,7 +19,7 @@ export default function EditTaskModal({
     setOpen(!open);
   };
 
-  const handleSubmit = (selectedDay) => {
+  const handleUpdateTask = (selectedDay) => {
     if (taskTitle) {
       update(ref(db, `/${auth.currentUser.uid}/${taskId}`), {
         text: taskTitle,
@@ -36,12 +32,26 @@ export default function EditTaskModal({
     }
   };
 
+  const taskProps = {
+    handleSubmit: handleUpdateTask,
+    handleClickClose: handleModal,
+    heading: 'What are you going to change ? 🧐',
+    open,
+    taskTitle,
+    setTaskTitle,
+    taskDescription,
+    setTaskDescription,
+    buttonText: 'UPDATE',
+    error,
+    setError,
+  };
+
   return (
     <div>
       <IconButton aria-label="edit task" onClick={handleModal}>
         <Edit />
       </IconButton>
-      <TaskForm handleSubmit={handleSubmit} handleClickClose={handleModal} heading="What are you going to change ? 🧐" today={today} maxDate={maxDate} open={open} taskTitle={taskTitle} setTaskTitle={setTaskTitle} taskDescription={taskDescription} setTaskDescription={setTaskDescription} buttonText="UPDATE" error={error} setError={setError} />
+      <TaskForm {...taskProps} />
     </div>
   );
 }

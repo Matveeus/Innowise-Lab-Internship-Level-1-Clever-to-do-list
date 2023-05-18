@@ -1,4 +1,5 @@
 import React, { createContext, useState, useMemo } from 'react';
+import dayjs from 'dayjs';
 import useTasks from '../hooks/getTasks';
 
 const TodoContext = createContext();
@@ -23,8 +24,7 @@ function TodoContextProvider({ children }) {
     if (nextMonthDays > 0) {
       const nextMonthDaysArray = [...Array(nextMonthDays).keys()].map((i) => i + 1);
       nextMonthDaysArray.forEach((day) => {
-        daysObj[new Date(nextMonth.getFullYear(), nextMonth.getMonth(), day + 1)
-          .toISOString().slice(0, 10)] = day;
+        daysObj[dayjs(nextMonth).add(day + 1, 'day').format('YYYY-MM-DD')] = day;
       });
     }
 

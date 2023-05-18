@@ -4,7 +4,7 @@ import { signOut } from 'firebase/auth';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Box, IconButton } from '@mui/material';
 import { auth } from '../services/firebase';
-import AddTaskModal from './AddTaskModal';
+import AddTaskModal from './task/AddTaskModal';
 import ErrorBar from './ErrorBar';
 
 export default function FooterButtons() {

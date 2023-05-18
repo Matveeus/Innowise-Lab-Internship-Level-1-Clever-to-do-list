@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@mui/material';
-import Register from '../components/Register';
+import Register from '../components/auth/Register';
 
 function RegisterPage() {
   return (

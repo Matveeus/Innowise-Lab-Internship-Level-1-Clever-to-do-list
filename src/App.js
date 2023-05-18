@@ -5,8 +5,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import TasksPage from './pages/TasksPage';
-import { TodoContextProvider } from './context';
+import Tasks from './pages/Tasks';
+import { TodoContextProvider } from './context/calendarData';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
 
         <Routes>
-          <Route path="/" element={<TasksPage />} />
+          <Route path="/" element={<Tasks />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>

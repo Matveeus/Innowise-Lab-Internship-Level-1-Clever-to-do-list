@@ -5,15 +5,15 @@ import {
 import { Delete } from '@mui/icons-material';
 import { remove, ref, update } from 'firebase/database';
 import EditTaskModal from './EditTaskModal';
-import { auth, db } from '../services/firebase';
+import { auth, db } from '../../services/firebase';
 
 function Task({
-  taskId,
-  name, description, checked,
+  taskId, name, description, checked,
 }) {
   const deleteTask = (id) => {
     remove(ref(db, `/${auth.currentUser.uid}/${id}`));
   };
+
   const toggleComplete = () => {
     update(ref(db, `/${auth.currentUser.uid}/${taskId}`), {
       checked: !checked,

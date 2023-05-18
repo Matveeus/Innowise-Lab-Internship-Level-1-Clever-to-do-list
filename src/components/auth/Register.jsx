@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import Form from './Form';
-import { auth } from '../services/firebase';
-import ErrorBar from './ErrorBar';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
-function Login() {
+import Form from './Form';
+import ErrorBar from '../ErrorBar';
+
+function Register() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-  const handleLogin = async (email, password) => {
+  const handleRegister = async (email, password) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const auth = getAuth();
+      await createUserWithEmailAndPassword(auth, email, password);
       navigate('/');
     } catch (err) {
       setError(err.message);
@@ -19,7 +20,7 @@ function Login() {
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = getAuth().onAuthStateChanged((user) => {
       if (user) {
         navigate('/');
       }
@@ -30,13 +31,13 @@ function Login() {
   return (
     <>
       <Form
-        title="Sign in"
-        handleClick={handleLogin}
-        buttonTitle="login"
+        title="Registration"
+        handleClick={handleRegister}
+        buttonTitle="register"
       />
       <ErrorBar error={error} setError={setError} />
     </>
   );
 }
 
-export default Login;
+export default Register;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@mui/material';
-import Login from '../components/Login';
+import Login from '../components/auth/Login';
 
 function LoginPage() {
   return (
