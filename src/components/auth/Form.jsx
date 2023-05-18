@@ -9,13 +9,17 @@ function Form({ title, handleClick, buttonTitle }) {
   const [password, setPassword] = useState('');
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main">
       <Box
         sx={{
-          marginTop: 8,
+          mt: 10,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          border: '2px solid',
+          borderColor: 'formBorder',
+          borderRadius: '10px',
+          padding: '10px 30px 10px 30px',
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>

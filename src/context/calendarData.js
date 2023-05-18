@@ -2,7 +2,7 @@ import React, { createContext, useState, useMemo } from 'react';
 import dayjs from 'dayjs';
 import useTasks from '../hooks/getTasks';
 
-const TodoContext = createContext();
+const TodoContext = createContext('');
 
 function TodoContextProvider({ children }) {
   const tasks = useTasks();

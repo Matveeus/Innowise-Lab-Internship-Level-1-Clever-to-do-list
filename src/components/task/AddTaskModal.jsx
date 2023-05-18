@@ -55,7 +55,7 @@ export default function AddTaskModal() {
   return (
     <div>
       <Button
-        variant="outlined"
+        variant="contained"
         startIcon={<AddIcon />}
         sx={{
           boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)', minWidth: '220px', width: '100%', height: '40px',

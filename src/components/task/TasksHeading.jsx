@@ -8,7 +8,14 @@ function TasksHeading({ tasksQuantity }) {
     selectedDay,
   } = useContext(TodoContext);
   return (
-    <Typography variant="h5" color="black" component="div" sx={{ textAlign: 'center', mt: 15, mb: 10 }}>
+    <Typography
+      variant="h5"
+      color="black"
+      component="div"
+      sx={{
+        textAlign: 'center', mt: 15, mb: 10, color: 'text',
+      }}
+    >
       {`You have ${tasksQuantity} task(s) for ${dayjs(selectedDay).format('MMMM DD')}`}
     </Typography>
   );

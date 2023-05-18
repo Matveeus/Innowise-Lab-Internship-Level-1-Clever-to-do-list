@@ -1,17 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Container } from '@mui/material';
 import Login from '../components/auth/Login';
+import AuthLink from '../components/auth/Link';
 
 function LoginPage() {
   return (
-    <Container maxWidth="xs">
+    <Container maxWidth="sm">
       <Login />
-      <div style={{ display: 'flex', justifyContent: 'center', fontFamily: 'Roboto' }}>
-        <Link to="/register" variant="body2">
-          Don&apos;t have an account? Register!
-        </Link>
-      </div>
+      <AuthLink text="Don&apos;t have an account? Register!" link="/register" />
     </Container>
   );
 }

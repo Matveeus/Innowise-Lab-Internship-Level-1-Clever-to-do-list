@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import Form from './Form';
 import { auth } from '../../services/firebase';
+import Form from './Form';
 import ErrorBar from '../ErrorBar';
 
 function Login() {

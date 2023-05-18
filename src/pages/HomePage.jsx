@@ -5,7 +5,7 @@ import Calendar from '../components/Calendar';
 import FooterButtons from '../components/FooterButtons';
 import AllTasks from '../components/task/AllTasks';
 
-function Tasks() {
+function HomePage() {
   const navigate = useNavigate();
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -23,4 +23,4 @@ function Tasks() {
   );
 }
 
-export default Tasks;
+export default HomePage;
