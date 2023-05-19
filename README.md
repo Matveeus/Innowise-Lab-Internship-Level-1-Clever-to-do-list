@@ -13,6 +13,13 @@ To install the necessary modules and run the application, follow these steps:
 2. Install dependencies by running the command **npm install** in your terminal.
 3. Start the development server with **npm start**.
 
+## Theme
+There is the possibility to change the theme of application inside the code.
+To do that:
+1. Go to **src/index.js** file
+2. Change last _import_ form **'./theme'** from "lightTheme" to "darkTheme"
+3. Change theme in **ThemeProvider** form "lightTheme" to "darkTheme"
+
 ## Database Snapshot
 The app uses Firebase (realtime database) as its database. Here is a snapshot of how entities are organized:
 
