@@ -29,7 +29,6 @@ export default function EditTaskModal({
         description: taskDescription,
         date: selectedDay,
       });
-      console.log(selectedDay);
       setOpen(false);
     }
   };

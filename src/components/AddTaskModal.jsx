@@ -34,7 +34,6 @@ export default function AddTaskModal() {
   const handleSaveTask = (selectedDay) => {
     const taskId = uid();
     if (taskTitle) {
-      console.log(selectedDay);
       createNewTask(taskId, selectedDay);
       setOpen(false);
     }
