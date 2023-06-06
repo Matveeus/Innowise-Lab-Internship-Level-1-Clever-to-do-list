@@ -31,8 +31,9 @@ export default function TaskForm({
               edge="start"
               color="inherit"
               aria-label="close"
+              onClick={handleClickClose}
             >
-              <CloseIcon onClick={handleClickClose} />
+              <CloseIcon />
             </IconButton>
             <Typography sx={{ textAlign: 'center', flex: 1 }} variant="h6" component="div">
               {heading}

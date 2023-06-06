@@ -33,8 +33,8 @@ function Task({
           </Typography>
         </Box>
         <EditTaskModal name={name} description={description} taskId={taskId} />
-        <IconButton aria-label="delete task">
-          <Delete onClick={() => deleteTask(taskId)} />
+        <IconButton aria-label="delete task" onClick={() => deleteTask(taskId)}>
+          <Delete />
         </IconButton>
       </Box>
       <Divider />

@@ -20,6 +20,7 @@ export default function EditTaskModal({
   };
 
   const handleUpdateTask = (selectedDay) => {
+    console.log(selectedDay);
     if (taskTitle) {
       update(ref(db, `/${auth.currentUser.uid}/${taskId}`), {
         text: taskTitle,

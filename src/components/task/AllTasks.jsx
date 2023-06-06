@@ -13,7 +13,7 @@ function AllTasks() {
       <TasksHeading tasksQuantity={filteredTasks.length} />
       {filteredTasks.map((task) => (
         <Task
-          key={task.id}
+          key={task.uidd}
           taskId={task.uidd}
           name={task.text}
           description={task.description}

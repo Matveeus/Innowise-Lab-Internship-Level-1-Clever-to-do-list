@@ -17,7 +17,7 @@ function HomePage() {
         navigate('/login');
       }
     });
-  });
+  }, [navigate]);
 
   if (isLoading) {
     return <Loader />;

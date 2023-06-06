@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../services/firebase';
 import Form from './Form';
 import ErrorBar from '../ErrorBar';
+import useAuthState from '../../hooks/useAuthState';
 
 function Login() {
   const navigate = useNavigate();
@@ -18,14 +19,7 @@ function Login() {
     }
   };
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigate('/');
-      }
-    });
-    return unsubscribe;
-  }, [navigate]);
+  useAuthState();
 
   return (
     <>
