@@ -7,22 +7,35 @@ import FooterButtons from '../components/FooterButtons';
 import AllTasks from '../components/task/AllTasks';
 import Loader from '../components/Loader';
 
+const LoadingState = {
+  Loading: 'loading',
+  Success: 'success',
+  Error: 'error',
+};
+
 function HomePage() {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
+  const [loadingState, setLoadingState] = useState(LoadingState.Loading);
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setIsLoading(false);
-      if (!user) {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setLoadingState(LoadingState.Success);
+      } else {
+        setLoadingState(LoadingState.Error);
         navigate('/login');
       }
     });
+
+    return () => {
+      unsubscribe();
+    };
   }, [navigate]);
 
-  if (isLoading) {
+  if (loadingState === LoadingState.Loading) {
     return <Loader />;
   }
+
   return (
     <Box sx={{ padding: '0 16px' }}>
       <Calendar />

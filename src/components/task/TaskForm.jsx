@@ -73,9 +73,9 @@ export default function TaskForm({
           maxWidth="m"
           sx={{
             width: '100%',
-            maxWidth: 500,
+            maxWidth: 800,
             margin: '0 auto',
-            marginTop: 15,
+            marginTop: 20,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -90,7 +90,7 @@ export default function TaskForm({
           />
           <TextField
             value={taskDescription}
-            sx={{ mt: 4, mb: 4 }}
+            sx={{ m: '40px 0' }}
             id="filled-textarea"
             label="Task description"
             rows={4}
@@ -111,7 +111,7 @@ export default function TaskForm({
           />
           <Button
             autoFocus
-            sx={{ mt: 4, mb: 4 }}
+            sx={{ m: '40px 0' }}
             color="success"
             fullWidth
             variant="contained"

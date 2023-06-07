@@ -11,13 +11,15 @@ export default function FooterButtons() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const handleSignOut = () => {
-    signOut(auth).then(() => {
-      navigate('/login');
-    })
+    signOut(auth)
+      .then(() => {
+        navigate('/login');
+      })
       .catch((err) => {
         setError(err.message);
       });
   };
+
   return (
     <Box
       sx={{
@@ -25,8 +27,13 @@ export default function FooterButtons() {
         justifyContent: 'center',
         position: 'fixed',
         bottom: '30px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        maxWidth: '800px',
         width: '100%',
         gap: '40px',
+        padding: '0 16px',
+
       }}
     >
       <AddTaskModal />

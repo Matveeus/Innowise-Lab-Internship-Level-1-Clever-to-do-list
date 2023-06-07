@@ -6,17 +6,23 @@ export default function useTasks() {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        onValue(ref(db, `/${auth.currentUser.uid}`), (snapshot) => {
+        const tasksRef = ref(db, `/${auth.currentUser.uid}`);
+        onValue(tasksRef, (snapshot) => {
           setTasks([]);
           const data = snapshot.val();
           if (data !== null) {
-            Object.values(data).map((task) => setTasks((oldArray) => [...oldArray, task]));
+            setTasks((oldArray) => [...oldArray, ...Object.values(data)]);
           }
         });
       }
     });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
+
   return tasks;
 }

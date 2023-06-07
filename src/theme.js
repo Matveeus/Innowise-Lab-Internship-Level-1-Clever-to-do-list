@@ -8,7 +8,8 @@ const lightTheme = createTheme({
     secondary: {
       main: '#7b1fa2',
     },
-    dayBorder: '#FFFFFF',
+    dayBorder: '#b6b6b6',
+    mainBorder: '#b6b6b6',
     formBorder: '#FFFFFF',
     today: '#357a38',
     task: {
@@ -28,6 +29,7 @@ const darkTheme = createTheme({
       main: '#3f51b5',
     },
     dayBorder: '#000000',
+    mainBorder: '#b6b6b6',
     formBorder: '#000000',
     today: '#357a38',
     task: {

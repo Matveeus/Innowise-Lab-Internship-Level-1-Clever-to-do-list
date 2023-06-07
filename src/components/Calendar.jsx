@@ -12,12 +12,11 @@ function Calendar() {
 
   const handleDayClick = (date) => {
     setSelectedDay(date);
-    console.log(selectedDay);
   };
 
   return (
     <>
-      <Typography variant="h5" sx={{ m: '20px 0', textAlign: 'center', color: 'text' }}>Calendar</Typography>
+      <Typography variant="h5" sx={{ m: '20px 0', textAlign: 'center', color: 'text' }}>Calendar 📅</Typography>
       <Box
         sx={{
           display: 'flex',
@@ -27,7 +26,8 @@ function Calendar() {
           overflowX: 'auto',
           scrollSnapType: 'x mandatory',
           padding: '10px',
-          border: '1px solid #1565c0',
+          border: '1px solid',
+          borderColor: 'mainBorder',
           borderRadius: '10px',
         }}
       >
@@ -60,6 +60,9 @@ function Calendar() {
                 cursor: 'pointer',
                 '&:hover': {
                   borderColor: 'primary.main',
+                },
+                '&:not(:last-child)': {
+                  marginRight: '4px',
                 },
               }}
               onClick={() => handleDayClick(date)}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
+import { Box } from '@mui/system';
 import { set, ref } from 'firebase/database';
 import { uid } from 'uid';
 import { db, auth } from '../../services/firebase';
@@ -29,7 +30,6 @@ export default function AddTaskModal() {
   };
 
   const handleSaveTask = (selectedDay) => {
-    console.log(selectedDay);
     const taskId = uid();
     if (taskTitle) {
       createNewTask(taskId, selectedDay);
@@ -54,7 +54,7 @@ export default function AddTaskModal() {
   };
 
   return (
-    <div>
+    <Box sx={{ width: '100%' }}>
       <Button
         variant="contained"
         startIcon={<AddIcon />}
@@ -66,6 +66,6 @@ export default function AddTaskModal() {
         Add new task
       </Button>
       <TaskForm {...taskProps} />
-    </div>
+    </Box>
   );
 }

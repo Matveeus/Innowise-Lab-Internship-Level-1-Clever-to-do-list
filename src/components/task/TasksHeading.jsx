@@ -13,10 +13,10 @@ function TasksHeading({ tasksQuantity }) {
       color="black"
       component="div"
       sx={{
-        textAlign: 'center', mt: 15, mb: 10, color: 'text',
+        textAlign: 'center', mt: 15, mb: 3, color: 'text',
       }}
     >
-      {`You have ${tasksQuantity} task(s) for ${dayjs(selectedDay).format('MMMM DD')}`}
+      {`You have ${tasksQuantity} ${tasksQuantity === 1 ? 'task' : 'tasks'} for ${dayjs(selectedDay).format('MMMM DD')} ${tasksQuantity === 0 ? '👎' : '💪'}`}
     </Typography>
   );
 }

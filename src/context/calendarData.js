@@ -2,14 +2,29 @@ import React, { createContext, useState, useMemo } from 'react';
 import dayjs from 'dayjs';
 import useTasks from '../hooks/getTasks';
 
-const TodoContext = createContext('');
+const TodoContext = createContext({});
 
 function TodoContextProvider({ children }) {
   const tasks = useTasks();
-  const today = new Date();
-  const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
-  const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
-  const daysInNextMonth = new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 0).getDate();
+  const today = useMemo(() => new Date(), []);
+  const maxDate = useMemo(() => new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() + 30,
+  ), [today]);
+
+  const nextMonth = useMemo(() => new Date(
+    today.getFullYear(),
+    today.getMonth() + 1,
+    1,
+  ), [today]);
+
+  const daysInNextMonth = useMemo(() => new Date(
+    nextMonth.getFullYear(),
+    nextMonth.getMonth(),
+    0,
+  ).getDate(), [nextMonth]);
+
   const daysOfMonth = useMemo(() => {
     const daysObj = [...Array(daysInNextMonth).keys()].reduce((obj, i) => {
       const day = i + today.getDate() + 1;
@@ -20,7 +35,6 @@ function TodoContextProvider({ children }) {
     const nextMonthDays = today.getDate();
     if (nextMonthDays > 0) {
       const nextMonthDaysArray = [...Array(nextMonthDays).keys()].map((i) => i + 1);
-      console.log(nextMonthDaysArray);
       nextMonthDaysArray.forEach((day) => {
         const date = dayjs(nextMonth).add(day, 'day').toDate();
         daysObj[date.toISOString().slice(0, 10)] = day;
