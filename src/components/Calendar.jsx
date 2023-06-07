@@ -12,6 +12,7 @@ function Calendar() {
 
   const handleDayClick = (date) => {
     setSelectedDay(date);
+    console.log(selectedDay);
   };
 
   return (
@@ -25,7 +26,9 @@ function Calendar() {
           m: '0 auto',
           overflowX: 'auto',
           scrollSnapType: 'x mandatory',
-          paddingBottom: '7px',
+          padding: '10px',
+          border: '1px solid #1565c0',
+          borderRadius: '10px',
         }}
       >
         {Object.entries(daysOfMonth).map(([date, day]) => {

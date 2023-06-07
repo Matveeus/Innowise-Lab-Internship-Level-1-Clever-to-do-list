@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 import { auth } from '../services/firebase';
 import Calendar from '../components/Calendar';
 import FooterButtons from '../components/FooterButtons';
@@ -23,11 +24,11 @@ function HomePage() {
     return <Loader />;
   }
   return (
-    <>
+    <Box sx={{ padding: '0 16px' }}>
       <Calendar />
       <AllTasks />
       <FooterButtons />
-    </>
+    </Box>
   );
 }
 

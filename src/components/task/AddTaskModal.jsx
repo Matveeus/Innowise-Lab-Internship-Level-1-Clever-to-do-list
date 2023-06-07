@@ -15,7 +15,7 @@ export default function AddTaskModal() {
   const handleModal = () => {
     setTaskTitle('');
     setTaskDescription('');
-    setOpen(true);
+    setOpen(!open);
   };
 
   const createNewTask = (taskId, selectedDay) => {

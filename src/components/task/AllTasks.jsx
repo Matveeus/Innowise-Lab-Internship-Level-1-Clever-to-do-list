@@ -11,15 +11,17 @@ function AllTasks() {
   return (
     <Box sx={{ maxWidth: 800, m: '0 auto', mb: '100px' }}>
       <TasksHeading tasksQuantity={filteredTasks.length} />
-      {filteredTasks.map((task) => (
-        <Task
-          key={task.uidd}
-          taskId={task.uidd}
-          name={task.text}
-          description={task.description}
-          checked={task.checked}
-        />
-      ))}
+      <Box sx={{ padding: '10px', border: '1px solid #1565c0', borderRadius: '10px' }}>
+        {filteredTasks.map((task) => (
+          <Task
+            key={task.uidd}
+            taskId={task.uidd}
+            name={task.text}
+            description={task.description}
+            checked={task.checked}
+          />
+        ))}
+      </Box>
     </Box>
   );
 }
