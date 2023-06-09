@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../services/firebase';
 import Form from './Form';
-import ErrorBar from '../ErrorBar';
 import useAuthState from '../../hooks/useAuthState';
 
 function Login() {
@@ -22,14 +21,13 @@ function Login() {
   useAuthState();
 
   return (
-    <>
-      <Form
-        title="Sign in"
-        handleClick={handleLogin}
-        buttonTitle="login"
-      />
-      <ErrorBar error={error} setError={setError} />
-    </>
+    <Form
+      title="Sign in"
+      handleClick={handleLogin}
+      error={error}
+      setError={setError}
+      buttonTitle="login"
+    />
   );
 }
 

@@ -12,10 +12,10 @@ export default function AuthLink({ text, link }) {
         display: 'flex',
         justifyContent: 'center',
         fontFamily: 'Roboto',
-        margin: '10px 0 10px 0',
+        margin: '20px 0',
       }}
     >
-      <Typography sx={{ color: 'secondary.main' }}>
+      <Typography sx={{ color: 'primary.main' }}>
         {text}
       </Typography>
     </Link>

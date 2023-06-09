@@ -26,7 +26,7 @@ function Task({
         display: 'flex', alignItems: 'center', m: '20px 0',
       }}
       >
-        <Checkbox checked={checked} onClick={() => toggleComplete(checked)} />
+        <Checkbox color="success" checked={checked} onClick={() => toggleComplete(checked)} />
         <Box sx={{ flexGrow: 1 }}>
           <Typography variant="h6" component="div" sx={{ textDecoration: checked ? 'line-through' : 'none', color: checked ? 'text.secondary' : 'text' }} onClick={() => toggleComplete(checked)}>
             {name}
