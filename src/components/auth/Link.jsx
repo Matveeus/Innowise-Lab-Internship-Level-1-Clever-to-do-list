@@ -15,9 +15,7 @@ export default function AuthLink({ text, link }) {
         margin: '20px 0',
       }}
     >
-      <Typography sx={{ color: 'primary.main' }}>
-        {text}
-      </Typography>
+      <Typography sx={{ color: 'primary.main' }}>{text}</Typography>
     </Link>
   );
 }

@@ -6,7 +6,7 @@ import { TodoContext } from '../../context/calendarData';
 
 function AllTasks() {
   const { tasks, selectedDay } = useContext(TodoContext);
-  const filteredTasks = tasks.filter((task) => task.date === selectedDay);
+  const filteredTasks = tasks.filter(task => task.date === selectedDay);
 
   return (
     <Box sx={{ maxWidth: 800, m: '0 auto', mb: '100px' }}>
@@ -21,9 +21,11 @@ function AllTasks() {
         }}
       >
         {filteredTasks.length < 1 ? (
-          <Typography variant="body1" sx={{ mt: '30px', textAlign: 'center' }}>Do not upset me! Do something!</Typography>
+          <Typography variant="body1" sx={{ mt: '30px', textAlign: 'center' }}>
+            Do not upset me! Do something!
+          </Typography>
         ) : (
-          filteredTasks.map((task) => (
+          filteredTasks.map(task => (
             <Task
               key={task.uidd}
               taskId={task.uidd}

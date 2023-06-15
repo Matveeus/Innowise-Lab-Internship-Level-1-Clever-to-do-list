@@ -18,7 +18,7 @@ function HomePage() {
   const [loadingState, setLoadingState] = useState(LoadingState.Loading);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
         setLoadingState(LoadingState.Success);
       } else {

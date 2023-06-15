@@ -6,7 +6,7 @@ export default function useAuthState() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
         navigate('/');
       }

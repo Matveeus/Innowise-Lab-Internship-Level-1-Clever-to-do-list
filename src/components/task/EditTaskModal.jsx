@@ -5,9 +5,7 @@ import { ref, update } from 'firebase/database';
 import { auth, db } from '../../services/firebase';
 import TaskForm from './TaskForm';
 
-export default function EditTaskModal({
-  name, description, taskId,
-}) {
+export default function EditTaskModal({ name, description, taskId }) {
   const [open, setOpen] = useState(false);
   const [taskTitle, setTaskTitle] = useState(name);
   const [taskDescription, setTaskDescription] = useState(description);
@@ -19,7 +17,7 @@ export default function EditTaskModal({
     setOpen(!open);
   };
 
-  const handleUpdateTask = (selectedDay) => {
+  const handleUpdateTask = selectedDay => {
     if (taskTitle) {
       update(ref(db, `/${auth.currentUser.uid}/${taskId}`), {
         text: taskTitle,
