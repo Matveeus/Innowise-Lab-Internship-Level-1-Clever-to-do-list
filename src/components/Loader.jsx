@@ -5,7 +5,11 @@ import '../assets/styles/App.css';
 export default function Loader() {
   return (
     <Container>
-      <Grid container sx={{ height: window.innerHeight - 45 }} alignItems="center">
+      <Grid
+        container
+        sx={{ height: window.innerHeight - 45, position: 'fixed', right: '0', background: 'white' }}
+        alignItems="center"
+      >
         <Grid container alignItems="center" justifyContent="center">
           <div className="lds-roller">
             <div />

@@ -23,7 +23,6 @@ function HomePage() {
         setLoadingState(LoadingState.Success);
       } else {
         setLoadingState(LoadingState.Error);
-        navigate('/login');
       }
     });
 

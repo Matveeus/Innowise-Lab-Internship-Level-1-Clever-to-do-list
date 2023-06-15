@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
-import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, Container, TextField, Typography } from '@mui/material';
 import { signInWithRedirect } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import logo from '../../assets/images/logo.png';
 import SocialLoginButtons from './SocialLoginButtons';
+import firebaseErrors from '../../services/firebaseErrors';
+import Loader from '../Loader';
 
 function Form({ title, handleClick, buttonTitle, error, setError }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: 'onBlur' });
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleEmailChange = e => {
     setEmail(e.target.value);
@@ -23,33 +32,24 @@ function Form({ title, handleClick, buttonTitle, error, setError }) {
     setPasswordRepeat(e.target.value);
   };
 
-  const validateEmail = newEmail => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(newEmail);
-  };
-
   const handleSocialSignIn = async (auth, authProvider) => {
     try {
+      setIsLoading(true);
       await signInWithRedirect(auth, authProvider);
       navigate('/');
     } catch (err) {
       setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleSubmit = () => {
-    if (!validateEmail(email)) {
-      setError('INVALID_EMAIL');
-      return;
-    }
+  if (isLoading === true) {
+    return <Loader />;
+  }
 
+  const handleFormSubmit = () => {
     handleClick(email, password, passwordRepeat);
-  };
-
-  const handleBlur = () => {
-    if (error) {
-      setError('');
-    }
   };
 
   return (
@@ -72,11 +72,11 @@ function Form({ title, handleClick, buttonTitle, error, setError }) {
         <SocialLoginButtons handleSocialSignIn={handleSocialSignIn} />
         <Typography>OR</Typography>
         <TextField
+          {...register('email', { required: 'Email is required', pattern: /^\S+@\S+$/i })}
+          error={errors?.email && true}
+          helperText={errors?.email && (errors?.email.message || 'Enter a valid email')}
           value={email}
           onChange={handleEmailChange}
-          onBlur={handleBlur}
-          error={error === 'INVALID_EMAIL'}
-          helperText={error === 'INVALID_EMAIL' ? 'Invalid email' : ''}
           margin="normal"
           required
           fullWidth
@@ -88,11 +88,14 @@ function Form({ title, handleClick, buttonTitle, error, setError }) {
         />
 
         <TextField
+          {...register('password', {
+            required: 'Wrong password',
+            minLength: { value: 6, message: 'Enter 6+ symbols' },
+          })}
+          error={errors?.password && true}
+          helperText={errors?.password && (errors?.password.message || 'Wrong password')}
           value={password}
           onChange={handlePasswordChange}
-          onBlur={handleBlur}
-          error={error === 'INVALID_PASSWORD'}
-          helperText={error === 'INVALID_PASSWORD' ? 'Invalid password' : ''}
           margin="normal"
           required
           fullWidth
@@ -105,11 +108,17 @@ function Form({ title, handleClick, buttonTitle, error, setError }) {
 
         {title === 'Registration' && (
           <TextField
+            {...register('passwordRepeat', {
+              required: 'Password and password confirmation do not match',
+              validate: value => value === password,
+            })}
+            error={errors?.passwordRepeat && true}
+            helperText={
+              errors?.passwordRepeat &&
+              (errors?.passwordRepeat.message || 'Password and password confirmation do not match')
+            }
             value={passwordRepeat}
             onChange={handlePasswordRepeatChange}
-            onBlur={handleBlur}
-            error={error === 'PASSWORD_MISMATCH'}
-            helperText={error === 'PASSWORD_MISMATCH' ? 'Passwords do not match' : ''}
             margin="normal"
             required
             fullWidth
@@ -120,12 +129,22 @@ function Form({ title, handleClick, buttonTitle, error, setError }) {
             autoComplete="current-password"
           />
         )}
-        <Button onClick={handleSubmit} type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+        {error && (
+          <Alert severity="error" onClose={() => setError('')} sx={{ width: '100%' }}>
+            {firebaseErrors[error]}
+          </Alert>
+        )}
+        <Button
+          onClick={handleSubmit(handleFormSubmit)}
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
           {buttonTitle}
         </Button>
       </Box>
     </Container>
   );
 }
-
 export default Form;
