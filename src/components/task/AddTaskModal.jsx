@@ -29,7 +29,7 @@ export default function AddTaskModal() {
     });
   };
 
-  const handleSaveTask = (selectedDay) => {
+  const handleSaveTask = selectedDay => {
     const taskId = uid();
     if (taskTitle) {
       createNewTask(taskId, selectedDay);
@@ -59,7 +59,10 @@ export default function AddTaskModal() {
         variant="contained"
         startIcon={<AddIcon />}
         sx={{
-          boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)', minWidth: '220px', width: '100%', height: '40px',
+          boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
+          minWidth: '220px',
+          width: '100%',
+          height: '40px',
         }}
         onClick={handleModal}
       >

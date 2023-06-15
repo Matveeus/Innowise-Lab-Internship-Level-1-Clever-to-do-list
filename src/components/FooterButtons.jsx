@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Box, IconButton } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { signOut } from 'firebase/auth';
 import { auth } from '../services/firebase';
 import AddTaskModal from './task/AddTaskModal';
@@ -15,7 +15,7 @@ export default function FooterButtons() {
       .then(() => {
         navigate('/login');
       })
-      .catch((err) => {
+      .catch(err => {
         setError(err.message);
       });
   };
@@ -33,18 +33,17 @@ export default function FooterButtons() {
         width: '100%',
         gap: '40px',
         padding: '0 16px',
-
       }}
     >
       <AddTaskModal />
-      <IconButton
-        color="primary"
+      <Button
+        variant="contained"
         aria-label="log out"
         onClick={handleSignOut}
         sx={{ boxShadow: '0px 2px 5px rgba(0, 0.1, 0.1, 0)' }}
       >
         <ExitToAppIcon />
-      </IconButton>
+      </Button>
       <ErrorBar error={error} setError={setError} />
     </Box>
   );

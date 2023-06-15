@@ -1,15 +1,5 @@
 import React, { useContext, useState } from 'react';
-import {
-  Container,
-  TextField,
-  Button,
-  Dialog,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Slide,
-} from '@mui/material';
+import { Container, TextField, Button, Dialog, AppBar, Toolbar, IconButton, Typography, Slide } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
@@ -31,20 +21,18 @@ export default function TaskForm({
   error,
   setError,
 }) {
-  const {
-    selectedDay, setSelectedDay, today, maxDate,
-  } = useContext(TodoContext);
+  const { selectedDay, setSelectedDay, today, maxDate } = useContext(TodoContext);
   const [tempSelectedDay, setTempSelectedDay] = useState(selectedDay);
 
-  const handleTaskTitleChange = (e) => {
+  const handleTaskTitleChange = e => {
     setTaskTitle(e.target.value);
   };
 
-  const handleTaskDescriptionChange = (e) => {
+  const handleTaskDescriptionChange = e => {
     setTaskDescription(e.target.value);
   };
 
-  const handleDatePickerChange = (tempSelected) => {
+  const handleDatePickerChange = tempSelected => {
     const formattedDate = dayjs(tempSelected).format('YYYY-MM-DD');
     setTempSelectedDay(formattedDate);
   };
@@ -81,13 +69,7 @@ export default function TaskForm({
             alignItems: 'center',
           }}
         >
-          <TextField
-            fullWidth
-            label="Task title"
-            id="fullWidth"
-            value={taskTitle}
-            onChange={handleTaskTitleChange}
-          />
+          <TextField fullWidth label="Task title" id="fullWidth" value={taskTitle} onChange={handleTaskTitleChange} />
           <TextField
             value={taskDescription}
             sx={{ m: '40px 0' }}

@@ -1,69 +1,43 @@
 import React, { useContext } from 'react';
 import { Box, Divider, Typography } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
-import '../App.css';
+import '../assets/styles/App.css';
 import { TodoContext } from '../context/calendarData';
+import { calendarBoxStyles, calendarContainerStyles } from '../assets/styles/calendarStyles';
 
 function Calendar() {
-  const {
-    daysOfMonth, selectedDay, setSelectedDay, today,
-    tasks,
-  } = useContext(TodoContext);
+  const { daysOfMonth, selectedDay, setSelectedDay, today, tasks } = useContext(TodoContext);
 
-  const handleDayClick = (date) => {
+  const handleDayClick = date => {
     setSelectedDay(date);
   };
 
   return (
     <>
-      <Typography variant="h5" sx={{ m: '20px 0', textAlign: 'center', color: 'text' }}>Calendar 📅</Typography>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          maxWidth: '800px',
-          m: '0 auto',
-          overflowX: 'auto',
-          scrollSnapType: 'x mandatory',
-          padding: '10px',
-          border: '1px solid',
-          borderColor: 'mainBorder',
-          borderRadius: '10px',
-        }}
-      >
+      <Typography variant="h5" sx={{ m: '20px 0', textAlign: 'center', color: 'text' }}>
+        Calendar 📅
+      </Typography>
+      <Box sx={calendarContainerStyles}>
         {Object.entries(daysOfMonth).map(([date, day]) => {
-          const filteredTasks = tasks.filter((task) => task.date === date);
+          const filteredTasks = tasks.filter(task => task.date === date);
           return (
             <Box
               key={date}
               sx={{
-                minWidth: 60,
-                flexShrink: 0,
-                textAlign: 'center',
+                ...calendarBoxStyles,
                 backgroundColor:
-                                          new Date(date).toDateString() === today.toDateString()
-                                            ? 'today'
-                                            : date === selectedDay
-                                              ? 'primary.main'
-                                              : 'transparent',
+                  new Date(date).toDateString() === today.toDateString()
+                    ? 'today'
+                    : date === selectedDay
+                    ? 'primary.main'
+                    : 'transparent',
                 color:
-                                          new Date(date).toDateString() === today.toDateString()
-                                            ? 'common.white'
-                                            : date === selectedDay
-                                              ? 'common.white'
-                                              : 'inherit',
+                  new Date(date).toDateString() === today.toDateString()
+                    ? 'common.white'
+                    : date === selectedDay
+                    ? 'common.white'
+                    : 'inherit',
                 fontWeight: day === selectedDay ? 'bold' : 'normal',
-                scrollSnapAlign: 'center',
-                borderRadius: '10px',
-                border: '1px solid',
-                borderColor: 'dayBorder',
-                cursor: 'pointer',
-                '&:hover': {
-                  borderColor: 'primary.main',
-                },
-                '&:not(:last-child)': {
-                  marginRight: '4px',
-                },
               }}
               onClick={() => handleDayClick(date)}
             >
@@ -78,21 +52,13 @@ function Calendar() {
                 <CircleIcon
                   sx={{
                     width: '10px',
-                    color: filteredTasks.some(
-                      (task) => task.checked,
-                    )
-                      ? 'task.done'
-                      : 'transparent',
+                    color: filteredTasks.some(task => task.checked) ? 'task.done' : 'transparent',
                   }}
                 />
                 <CircleIcon
                   sx={{
                     width: '10px',
-                    color: filteredTasks.some(
-                      (task) => !task.checked,
-                    )
-                      ? 'task.todo'
-                      : 'transparent',
+                    color: filteredTasks.some(task => !task.checked) ? 'task.todo' : 'transparent',
                   }}
                 />
               </Box>

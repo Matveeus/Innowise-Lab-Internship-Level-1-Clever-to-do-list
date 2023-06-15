@@ -18,6 +18,4 @@ const googleAuthProvider = new GoogleAuthProvider();
 const facebookAuthProvider = new FacebookAuthProvider();
 const db = getDatabase(app);
 const auth = getAuth();
-export {
-  db, auth, googleAuthProvider, facebookAuthProvider,
-};
+export { db, auth, googleAuthProvider, facebookAuthProvider };

@@ -7,23 +7,14 @@ const TodoContext = createContext({});
 function TodoContextProvider({ children }) {
   const tasks = useTasks();
   const today = useMemo(() => new Date(), []);
-  const maxDate = useMemo(() => new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate() + 30,
-  ), [today]);
+  const maxDate = useMemo(() => new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30), [today]);
 
-  const nextMonth = useMemo(() => new Date(
-    today.getFullYear(),
-    today.getMonth() + 1,
-    1,
-  ), [today]);
+  const nextMonth = useMemo(() => new Date(today.getFullYear(), today.getMonth() + 1, 1), [today]);
 
-  const daysInNextMonth = useMemo(() => new Date(
-    nextMonth.getFullYear(),
-    nextMonth.getMonth(),
-    0,
-  ).getDate(), [nextMonth]);
+  const daysInNextMonth = useMemo(
+    () => new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 0).getDate(),
+    [nextMonth],
+  );
 
   const daysOfMonth = useMemo(() => {
     const daysObj = [...Array(daysInNextMonth).keys()].reduce((obj, i) => {
@@ -34,8 +25,8 @@ function TodoContextProvider({ children }) {
 
     const nextMonthDays = today.getDate();
     if (nextMonthDays > 0) {
-      const nextMonthDaysArray = [...Array(nextMonthDays).keys()].map((i) => i + 1);
-      nextMonthDaysArray.forEach((day) => {
+      const nextMonthDaysArray = [...Array(nextMonthDays).keys()].map(i => i + 1);
+      nextMonthDaysArray.forEach(day => {
         const date = dayjs(nextMonth).add(day, 'day').toDate();
         daysObj[date.toISOString().slice(0, 10)] = day;
       });
@@ -46,15 +37,19 @@ function TodoContextProvider({ children }) {
 
   const [selectedDay, setSelectedDay] = useState(Object.keys(daysOfMonth)[0]);
 
-  const value = useMemo(() => ({
-    daysOfMonth, selectedDay, setSelectedDay, today, tasks, maxDate,
-  }), [daysOfMonth, selectedDay, today, tasks, maxDate]);
-
-  return (
-    <TodoContext.Provider value={value}>
-      {children}
-    </TodoContext.Provider>
+  const value = useMemo(
+    () => ({
+      daysOfMonth,
+      selectedDay,
+      setSelectedDay,
+      today,
+      tasks,
+      maxDate,
+    }),
+    [daysOfMonth, selectedDay, today, tasks, maxDate],
   );
+
+  return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 }
 
 export { TodoContextProvider, TodoContext };
